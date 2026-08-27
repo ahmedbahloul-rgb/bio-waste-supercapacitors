@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOYAU | Bio-Waste Supercapacitors — From Algerian Biomass to Energy Storage</title>
+<meta name="description" content="NOYAU develops sustainable supercapacitor electrodes from activated carbon derived from Algerian agricultural biomass, including date pits and olive pits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --carbon:#15120d;
+  --carbon-2:#1e1810;
+  --carbon-3:#282017;
+  --bone:#ede3d0;
+  --bone-dim:#c9bfa9;
+  --date:#a85a34;
+  --date-deep:#7c3f22;
+  --olive:#7c8a4a;
+  --olive-deep:#5b6636;
+  --ember:#e8a63d;
+  --ember-soft:rgba(232,166,61,0.14);
+  --rust:#c15535;
+  --line:rgba(237,227,208,0.14);
+  --disp:'Space Grotesk',sans-serif;
+  --body:'IBM Plex Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;} *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}}
+body{
+  background:var(--carbon);
+  color:var(--bone);
+  font-family:var(--body);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;}
+::selection{background:var(--ember);color:var(--carbon);}
+:focus-visible{outline:2px solid var(--ember); outline-offset:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+@media(max-width:640px){.wrap{padding:0 20px;}}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ember);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--ember);}
+
+h1,h2,h3,h4{font-family:var(--disp);font-weight:600;letter-spacing:-0.01em;color:var(--bone);}
+
+/* ===== texture: porous carbon stipple ===== */
+.pore-field{
+  position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(circle at 1px 1px, rgba(237,227,208,0.09) 1px, transparent 1.6px);
+  background-size:26px 26px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 20%, black 40%, transparent 90%);
+}
+
+/* ===== NAV ===== */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(21,18,13,0.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav{display:flex; align-items:center; justify-content:space-between; padding:18px 32px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:0.01em;}
+.brand .mark{width:30px;height:30px;flex:none;}
+.brand small{display:block;font-family:var(--mono);font-weight:400;font-size:10px;color:var(--bone-dim);letter-spacing:0.08em;}
+.nav-links{display:flex;gap:34px;font-size:14.5px;}
+.nav-links a{color:var(--bone-dim);transition:color .2s;position:relative;}
+.nav-links a:hover{color:var(--bone);}
+.nav-cta{
+  font-family:var(--mono);font-size:13px;font-weight:500;
+  background:var(--ember); color:var(--carbon);
+  padding:10px 20px; border-radius:2px;
+  letter-spacing:0.02em;
+  transition:transform .2s, background .2s;
+}
+.nav-cta:hover{background:#f2b652; transform:translateY(-1px);}
+.burger{display:none;background:none;border:none;color:var(--bone);width:26px;height:20px;position:relative;cursor:pointer;}
+.burger span{position:absolute;left:0;right:0;height:2px;background:var(--bone);transition:.25s;}
+.burger span:nth-child(1){top:0;} .burger span:nth-child(2){top:9px;} .burger span:nth-child(3){top:18px;}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:64px;left:0;right:0;background:var(--carbon-2);flex-direction:column;gap:0;padding:8px 0;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s;}
+  .nav-links.open{transform:translateY(0);}
+  .nav-links a{padding:14px 32px;width:100%;border-top:1px solid var(--line);}
+  .burger{display:block;}
+  .nav-cta{display:none;}
+}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:150px 0 60px;overflow:hidden;}
+.hero-glow{position:absolute;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle, rgba(232,166,61,0.20) 0%, rgba(232,166,61,0) 70%);
+  top:-180px; right:-160px; filter:blur(10px); animation:drift 14s ease-in-out infinite;}
+@keyframes drift{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,40px);}}
+.hero-inner{position:relative;z-index:2;}
+.hero h1{font-size:clamp(40px,6.4vw,84px);line-height:0.98;max-width:920px;}
+.hero h1 .accent{color:var(--ember); font-style:normal;}
+.hero h1 .strike{position:relative; color:var(--bone-dim);}
+.hero-sub{
+  font-size:clamp(16px,1.9vw,19px); color:var(--bone-dim); max-width:560px; margin-top:26px; font-weight:400;
+}
+.hero-actions{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;}
+.btn{
+  font-family:var(--mono);font-size:13.5px;font-weight:500;letter-spacing:0.02em;
+  padding:15px 26px;border-radius:2px;display:inline-flex;align-items:center;gap:10px;
+  transition:transform .2s, background .2s, border-color .2s;
+}
+.btn-primary{background:var(--ember);color:var(--carbon);}
+.btn-primary:hover{background:#f2b652;transform:translateY(-2px);}
+.btn-ghost{border:1px solid var(--line);color:var(--bone);}
+.btn-ghost:hover{border-color:var(--ember);color:var(--ember);transform:translateY(-2px);}
+
+.metric-strip{
+  position:relative;z-index:2; margin-top:76px;
+  display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line);
+}
+.metric-strip div{padding:22px 26px 4px; border-right:1px solid var(--line);}
+.metric-strip div:last-child{border-right:none;}
+.metric-strip .num{font-family:var(--disp);font-size:clamp(22px,2.6vw,34px);color:var(--ember);font-weight:700;}
+.metric-strip .lbl{font-family:var(--mono);font-size:11.5px;color:var(--bone-dim);letter-spacing:0.03em;margin-top:6px;}
+@media(max-width:760px){.metric-strip{grid-template-columns:repeat(2,1fr);} .metric-strip div{border-bottom:1px solid var(--line);}}
+
+/* ===== SECTION generic ===== */
+section{position:relative; padding:118px 0;}
+@media(max-width:760px){section{padding:80px 0;}}
+.section-head{max-width:640px; margin-bottom:60px;}
+.section-head h2{font-size:clamp(28px,4vw,46px); line-height:1.08;}
+.section-head p{color:var(--bone-dim); margin-top:18px; font-size:16.5px;}
+.divider{height:1px;background:var(--line);}
+
+/* reveal */
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ===== PROBLEM ===== */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+@media(max-width:820px){.problem-grid{grid-template-columns:1fr;gap:40px;}}
+.problem-grid h3{font-size:15px;font-family:var(--mono);color:var(--olive);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:18px;font-weight:500;}
+.problem-grid ul{list-style:none;}
+.problem-grid li{padding:14px 0; border-top:1px solid var(--line); font-size:15.5px; color:var(--bone-dim); display:flex; gap:14px;}
+.problem-grid li::before{content:"→"; color:var(--ember); flex:none;}
+
+/* ===== PROCESS (signature) ===== */
+.process{background:var(--carbon-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.process-flow{display:grid;grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-top:20px;}
+.process-flow::before{
+  content:""; position:absolute; top:74px; left:5%; right:5%; height:1px;
+  background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 16px);
+  z-index:0;
+}
+@media(max-width:900px){.process-flow{grid-template-columns:1fr; gap:36px;} .process-flow::before{display:none;}}
+.p-step{position:relative; z-index:1; padding:0 18px;}
+.p-step .icon-holder{
+  width:76px;height:76px;border-radius:50%;background:var(--carbon);
+  border:1px solid var(--line); display:flex;align-items:center;justify-content:center;
+  margin-bottom:26px; transition:border-color .25s, transform .25s;
+}
+.p-step:hover .icon-holder{border-color:var(--ember); transform:translateY(-4px);}
+.p-step .idx{font-family:var(--mono); font-size:12px; color:var(--ember); letter-spacing:0.06em; margin-bottom:10px;}
+.p-step h4{font-size:18.5px; margin-bottom:10px;}
+.p-step p{font-size:14.5px;color:var(--bone-dim);}
+
+/* ===== RESULTS ===== */
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:60px;}
+@media(max-width:820px){.results-grid{grid-template-columns:1fr;}}
+.r-card{background:var(--carbon); padding:38px 32px;}
+.r-card .big{font-family:var(--disp); font-size:44px; color:var(--ember); font-weight:700; line-height:1;}
+.r-card .unit{font-family:var(--mono); font-size:13px; color:var(--bone-dim); margin-top:10px;}
+.r-card .cap{margin-top:14px; font-size:14.5px; color:var(--bone-dim); border-top:1px solid var(--line); padding-top:14px;}
+
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+@media(max-width:820px){.compare{grid-template-columns:1fr; gap:40px;}}
+.bars{display:flex; gap:40px; align-items:flex-end; height:220px; padding-top:20px;}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;}
+.bar{width:100%; max-width:88px; background:var(--carbon-3); border-radius:2px 2px 0 0; position:relative; display:flex; align-items:flex-start; justify-content:center; padding-top:8px;}
+.bar.ours{background:linear-gradient(180deg, var(--ember), var(--date-deep));}
+.bar span{font-family:var(--mono); font-size:13px; color:var(--carbon); font-weight:600;}
+.bar.commercial span{color:var(--bone);}
+.bar-col small{font-family:var(--mono); font-size:11.5px; color:var(--bone-dim); text-align:center; letter-spacing:0.02em;}
+.compare-note{font-size:13px; color:var(--bone-dim); font-style:italic; margin-top:14px;}
+
+/* ===== WHY ALGERIA ===== */
+.adv-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+@media(max-width:820px){.adv-grid{grid-template-columns:1fr;}}
+.adv-card{background:var(--carbon-2); padding:32px 28px;}
+.adv-card .adv-num{font-family:var(--mono); font-size:12px; color:var(--olive); letter-spacing:0.06em; margin-bottom:14px;}
+.adv-card h4{font-size:17px; margin-bottom:10px;}
+.adv-card p{font-size:14px; color:var(--bone-dim);}
+
+.fact-band{display:flex; flex-wrap:wrap; gap:0; margin-top:1px; border:1px solid var(--line); border-top:none;}
+.fact{flex:1; min-width:200px; padding:26px 28px; border-right:1px solid var(--line); border-top:1px solid var(--line);}
+.fact:last-child{border-right:none;}
+.fact .n{font-family:var(--disp); font-size:26px; color:var(--bone); font-weight:700;}
+.fact .l{font-family:var(--mono); font-size:11.5px; color:var(--bone-dim); margin-top:6px;}
+
+/* ===== MARKET / BUSINESS ===== */
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
+@media(max-width:820px){.two-col{grid-template-columns:1fr; gap:44px;}}
+.stream{border-top:1px solid var(--line); padding:20px 0; display:flex; gap:20px; align-items:baseline;}
+.stream .tag{font-family:var(--mono); font-size:11px; color:var(--ember); flex:none; width:52px;}
+.stream h4{font-size:16px; margin-bottom:6px;}
+.stream p{font-size:14px; color:var(--bone-dim);}
+
+.phase-list{border-top:1px solid var(--line);}
+.phase{display:grid; grid-template-columns:120px 1fr; gap:24px; padding:22px 0; border-bottom:1px solid var(--line);}
+.phase .ph-time{font-family:var(--mono); font-size:12.5px; color:var(--olive); padding-top:3px;}
+.phase h4{font-size:16.5px; margin-bottom:8px;}
+.phase p{font-size:14px; color:var(--bone-dim);}
+@media(max-width:560px){.phase{grid-template-columns:1fr; gap:6px;}}
+
+/* ===== TEAM ===== */
+.team{background:var(--carbon-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.team-card{display:grid; grid-template-columns:200px 1fr; gap:44px; align-items:center;}
+@media(max-width:700px){.team-card{grid-template-columns:1fr;}}
+.avatar{width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--ember), var(--date-deep) 60%, var(--carbon) 100%);
+  display:flex; align-items:center; justify-content:center; font-family:var(--disp); font-size:52px; font-weight:700; color:var(--carbon);
+  border:1px solid var(--line);
+}
+.team-info h3{font-size:26px; margin-bottom:4px;}
+.team-info .role{font-family:var(--mono); color:var(--bone-dim); font-size:13.5px; margin-bottom:20px;}
+.team-badges{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px;}
+.badge{font-family:var(--mono); font-size:12px; border:1px solid var(--line); padding:8px 14px; border-radius:20px; color:var(--bone-dim);}
+.badge b{color:var(--ember); font-weight:600;}
+
+/* ===== FUNDING ===== */
+.fund-box{border:1px solid var(--line); padding:44px; display:grid; grid-template-columns:1fr 1fr; gap:44px;}
+@media(max-width:760px){.fund-box{grid-template-columns:1fr; padding:28px;}}
+.ask{font-family:var(--disp); font-size:clamp(30px,4vw,44px); color:var(--ember); font-weight:700;}
+.alloc-row{display:flex; align-items:center; gap:16px; margin-top:16px; font-size:13.5px;}
+.alloc-bar{flex:1; height:8px; background:var(--carbon-3); border-radius:4px; overflow:hidden;}
+.alloc-bar i{display:block; height:100%; background:var(--ember); border-radius:4px;}
+.alloc-pct{font-family:var(--mono); width:44px; text-align:right; color:var(--bone-dim);}
+
+.src-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:20px;}
+@media(max-width:640px){.src-grid{grid-template-columns:1fr;}}
+.src{border:1px solid var(--line); padding:20px; border-radius:2px;}
+.src h5{font-family:var(--mono); font-size:13px; color:var(--olive); margin-bottom:8px; letter-spacing:0.02em;}
+.src p{font-size:13.5px; color:var(--bone-dim);}
+
+/* ===== CONTACT ===== */
+.contact{background:var(--carbon-2);}
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr; gap:44px;}}
+.field{margin-bottom:20px;}
+.field label{display:block; font-family:var(--mono); font-size:12px; color:var(--bone-dim); margin-bottom:8px; letter-spacing:0.03em;}
+.field input, .field select, .field textarea{
+  width:100%; background:var(--carbon); border:1px solid var(--line); color:var(--bone);
+  padding:13px 14px; font-family:var(--body); font-size:14.5px; border-radius:2px; transition:border-color .2s;
+}
+.field textarea{resize:vertical; min-height:100px;}
+.field input:focus, .field select:focus, .field textarea:focus{border-color:var(--ember); outline:none;}
+.submit-btn{width:100%; margin-top:6px;}
+.contact-info h4{font-family:var(--mono); font-size:12px; color:var(--olive); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px;}
+.contact-line{display:flex; justify-content:space-between; padding:14px 0; border-top:1px solid var(--line); font-size:14.5px;}
+.contact-line span:first-child{color:var(--bone-dim);}
+.form-note{font-size:12.5px; color:var(--bone-dim); margin-top:14px;}
+.form-msg{font-family:var(--mono); font-size:13px; margin-top:14px; display:none;}
+.form-msg.show{display:block; color:var(--ember);}
+
+footer{padding:40px 0; border-top:1px solid var(--line);}
+.foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+.foot-row p{font-size:12.5px; color:var(--bone-dim); font-family:var(--mono);}
+
+/* ===== VISUAL STORY ===== */
+.hero-image{
+  position:absolute;right:0;top:50%;transform:translateY(-45%);
+  width:min(42vw,500px);height:520px;border:1px solid var(--line);
+  overflow:hidden;background:var(--carbon-2);z-index:1;
+  box-shadow:0 30px 80px rgba(0,0,0,.28);
+}
+.hero-image::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--carbon) 0%,rgba(21,18,13,.18) 45%,rgba(21,18,13,.05) 100%);
+}
+.hero-image img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.05);}
+.hero-image-label{
+  position:absolute;z-index:2;left:22px;bottom:20px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  color:var(--bone);background:rgba(21,18,13,.78);padding:10px 12px;
+  border:1px solid var(--line);
+}
+.hero-trust{margin-top:24px;font-family:var(--mono);font-size:11px;color:var(--bone-dim);letter-spacing:.05em;}
+@media(max-width:980px){
+  .hero-image{opacity:.24;width:70vw;right:-8vw;}
+  .hero h1,.hero-sub,.hero-actions{max-width:760px;position:relative;z-index:3;}
+}
+@media(max-width:640px){
+  .hero-image{height:420px;width:95vw;right:-25vw;}
+  .hero-image-label{display:none;}
+}
+
+.photo-story{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:50px;}
+.photo-card{position:relative;min-height:300px;overflow:hidden;border:1px solid var(--line);background:var(--carbon-2);}
+.photo-card.tall{min-height:430px;}
+.photo-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.05);transition:transform .6s ease;}
+.photo-card:hover img{transform:scale(1.035);}
+.photo-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(21,18,13,.88) 100%);}
+.photo-caption{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;}
+.photo-caption .tag{font-family:var(--mono);font-size:11px;color:var(--ember);letter-spacing:.08em;text-transform:uppercase;}
+.photo-caption h3{font-size:23px;margin-top:6px;}
+.photo-caption p{font-size:13.5px;color:var(--bone-dim);margin-top:5px;}
+.photo-credit{font-family:var(--mono);font-size:10.5px;color:var(--bone-dim);margin-top:12px;}
+.photo-credit a{text-decoration:underline;}
+@media(max-width:760px){
+  .photo-story{grid-template-columns:1fr;}
+  .photo-card,.photo-card.tall{min-height:320px;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="pore-field" style="position:fixed;"></div>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <svg class="mark" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="14" stroke="#e8a63d" stroke-width="1.4"/><circle cx="15" cy="15" r="5.5" fill="#e8a63d"/><circle cx="15" cy="15" r="9.5" stroke="#e8a63d" stroke-width="0.8" stroke-dasharray="1.5 3"/></svg>
+      <div>NOYAU<small>ENERGY FROM WASTE</small></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#problem">Problem</a>
+      <a href="#feedstock">Feedstock</a>
+      <a href="#process">Process</a>
+      <a href="#results">Results</a>
+      <a href="#algeria">Why Algeria</a>
+      <a href="#team">Team</a>
+      <a href="#funding">Funding</a>
+    </div>
+    <a href="#contact" class="nav-cta">Become a partner</a>
+    <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+     <div class="hero-image">
+       <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Algerian%20Dates.jpg" alt="Algerian dates — representative biomass resource">
+       <div class="hero-image-label">Algerian biomass → advanced carbon materials</div>
+     </div>
+    <div class="pore-field"></div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Applied research · Université de M'sila, Algeria</div>
+      <h1>From agricultural <span class="strike">waste</span> to <span class="accent">energy storage.</span></h1>
+      <p class="hero-sub">NOYAU transforms locally available date and olive pits into high-performance activated carbon for supercapacitor electrodes. Our research combines waste valorization, electrochemistry and materials engineering to create a pathway toward sustainable, locally sourced energy storage.</p>
+      <div class="hero-actions">
+        <a href="#funding" class="btn btn-primary">Invest in the project →</a>
+        <a href="#results" class="btn btn-ghost">See the scientific results</a>
+      </div>
+    </div>
+    <div class="wrap metric-strip">
+      <div><div class="num">528 F/g</div><div class="lbl">SPECIFIC CAPACITANCE</div></div>
+      <div><div class="num">96.5%</div><div class="lbl">RETENTION / 10,000 CYCLES</div></div>
+      <div><div class="num">36.8 Wh/kg</div><div class="lbl">SPECIFIC ENERGY</div></div>
+      <div><div class="num">LOCAL</div><div class="lbl">BIOMASS FEEDSTOCK</div></div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">The situation</div>
+        <h2>Two problems, one solution.</h2>
+        <p>The energy transition needs fast, durable energy storage. At the same time, agricultural residues represent an underused source of carbon-rich feedstock.</p>
+      </div>
+      <div class="problem-grid reveal">
+        <div>
+          <h3>The energy challenge</h3>
+          <ul>
+            <li>Conventional batteries hit limits on power delivery and cycle life</li>
+            <li>Supercapacitors offer rapid charge/discharge and exceptional durability</li>
+            <li>Activated carbon, the key raw material, remains costly and largely imported</li>
+          </ul>
+        </div>
+        <div>
+          <h3>The Algerian context</h3>
+          <ul>
+            <li>Algeria has important date and olive production, generating valuable agricultural residues</li>
+            <li>These residues can be converted into higher-value carbon materials instead of remaining underutilized</li>
+            <li>Scientific literature confirms the potential of these residues as activated-carbon precursors</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- VISUAL STORY -->
+  <section id="feedstock">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">From biomass to materials</div>
+        <h2>Waste streams become a new energy resource.</h2>
+        <p>Our concept connects agricultural residues with advanced carbon materials: collect the biomass, convert it into porous carbon, engineer the electrode, and validate electrochemical performance.</p>
+      </div>
+      <div class="photo-story reveal">
+        <article class="photo-card tall">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Algerian%20Dates.jpg" alt="Algerian dates">
+          <div class="photo-caption">
+            <div class="tag">01 · Feedstock</div>
+            <h3>Date pits</h3>
+            <p>A locally available biomass precursor for carbon-material development.</p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Nocciolino%20g1.jpg" alt="Olive stones separated from olive pomace">
+          <div class="photo-caption">
+            <div class="tag">02 · Feedstock</div>
+            <h3>Olive stones</h3>
+            <p>An agricultural residue with strong potential for carbon conversion.</p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Activated%20Carbon.jpg" alt="Activated carbon in powder and block form">
+          <div class="photo-caption">
+            <div class="tag">03 · Material</div>
+            <h3>Activated carbon</h3>
+            <p>Porous carbon designed for electrochemical energy-storage electrodes.</p>
+          </div>
+        </article>
+      </div>
+      <p class="photo-credit">Illustrative images: Wikimedia Commons. Check the individual image licenses and attribution requirements before commercial reuse.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS (signature) -->
+  <section id="process" class="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">The process</div>
+        <h2>From pit to electrode, in four steps.</h2>
+        <p>A locally available biomass feedstock transformed through a controlled and scalable materials-processing route.</p>
+      </div>
+      <div class="process-flow reveal">
+        <div class="p-step">
+          <div class="icon-holder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><ellipse cx="16" cy="16" rx="8" ry="12" stroke="#e8a63d" stroke-width="1.4"/><path d="M12 8 Q16 16 12 24 M20 8 Q16 16 20 24" stroke="#e8a63d" stroke-width="1" opacity="0.6"/></svg>
+          </div>
+          <div class="idx">01 / COLLECTION</div>
+          <h4>Collection &amp; crushing</h4>
+          <p>Date and olive pits sourced from local agricultural supply chains, then crushed to a fine particle size.</p>
+        </div>
+        <div class="p-step">
+          <div class="icon-holder">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 3c3 5-4 6-2 12 1.5 4 6 5 6 9a6 6 0 0 1-12 0c0-3 2-4 2-7-3 2-4 5-4 5s-2-6 2-11c0 2 1 3 2 3-1-5 3-7 6-11z" fill="#e8a63d"/></svg>
+          </div>
+          <div class="idx">02 / CARBONIZATION</div>
+          <h4>Thermal treatment</h4>
+          <p>High-temperature pyrolysis under controlled atmosphere to produce a carbon-rich char.</p>
+        </div>
+        <div class="p-step">
+          <div class="icon-holder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="#e8a63d" stroke-width="1.4"/><circle cx="12" cy="12" r="1.6" fill="#e8a63d"/><circle cx="19" cy="10" r="1.2" fill="#e8a63d"/><circle cx="21" cy="17" r="1.6" fill="#e8a63d"/><circle cx="14" cy="20" r="1.2" fill="#e8a63d"/><circle cx="10" cy="17" r="1" fill="#e8a63d"/><circle cx="17" cy="15" r="1" fill="#e8a63d"/></svg>
+          </div>
+          <div class="idx">03 / ACTIVATION</div>
+          <h4>Chemical activation (KOH)</h4>
+          <p>Creation of a microscopic pore network that multiplies the carbon's active surface area.</p>
+        </div>
+        <div class="p-step">
+          <div class="icon-holder">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><rect x="6" y="5" width="18" height="5" rx="1" stroke="#e8a63d" stroke-width="1.3"/><rect x="6" y="12.5" width="18" height="5" rx="1" stroke="#e8a63d" stroke-width="1.3"/><rect x="6" y="20" width="18" height="5" rx="1" fill="#e8a63d"/></svg>
+          </div>
+          <div class="idx">04 / FABRICATION</div>
+          <h4>Electrode assembly</h4>
+          <p>Shaping the activated carbon into electrodes ready to integrate into a supercapacitor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Scientific validation</div>
+        <h2>Strong laboratory performance.</h2>
+        <p>Our results include binary/ternary carbon materials based on date pits, olive pits and sugar, as well as hybrid electrodes combining olive-derived activated carbon with polyaniline (PAni) and reduced graphene oxide (rGO).</p>
+      </div>
+
+      <div class="results-grid reveal">
+        <div class="r-card">
+          <div class="big">528</div>
+          <div class="unit">F g⁻¹ at 0.3 A g⁻¹</div>
+          <div class="cap">Specific capacitance of the binary/ternary date-olive activated carbon.</div>
+        </div>
+        <div class="r-card">
+          <div class="big">96.5%</div>
+          <div class="unit">retention over 10,000 cycles</div>
+          <div class="cap">Cycling stability in mixed aqueous electrolyte (H₂SO₄ / KCl).</div>
+        </div>
+        <div class="r-card">
+          <div class="big">582.6</div>
+          <div class="unit">F g⁻¹ at 0.1 A g⁻¹</div>
+          <div class="cap">Hybrid electrode (olive-derived carbon + PAni + rGO), 90% retention after 3,000 cycles.</div>
+        </div>
+      </div>
+
+      <div class="compare reveal">
+        <div>
+          <h3 style="font-size:15px;font-family:var(--mono);color:var(--olive);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:22px;font-weight:500;">Indicative comparison</h3>
+          <p style="color:var(--bone-dim);font-size:15px;">Published activated-carbon performance varies widely with precursor, activation route and test conditions. The comparison below is therefore indicative rather than a direct like-for-like commercial benchmark.</p>
+        </div>
+        <div>
+          <div class="bars">
+            <div class="bar-col">
+              <div class="bar commercial" style="height:52%;"><span>~200</span></div>
+              <small>COMMERCIAL CARBON<br>(fossil, typical)</small>
+            </div>
+            <div class="bar-col">
+              <div class="bar ours" style="height:100%;"><span style="color:var(--carbon)">528</span></div>
+              <small>NOYAU CARBON<br>(date + olive)</small>
+            </div>
+          </div>
+          <p class="compare-note">Values in F g⁻¹ — commercial range drawn from scientific literature, for illustration only.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- WHY ALGERIA -->
+  <section id="algeria">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Local advantage</div>
+        <h2>Why build this technology in Algeria?</h2>
+        <p>Local biomass availability, scientific expertise and an opportunity to build value-added energy-storage materials close to the raw-material source.</p>
+      </div>
+      <div class="adv-grid reveal">
+        <div class="adv-card">
+          <div class="adv-num">01</div>
+          <h4>Abundant raw material</h4>
+          <p>Large volumes of date and olive residues are generated through agricultural and food-processing activities, offering a potentially low-cost local feedstock.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-num">02</div>
+          <h4>Government backing</h4>
+          <p>Algeria Startup Fund (ASF) and a pan-African Startup Fund backed by the presidency.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-num">03</div>
+          <h4>Growing ecosystem</h4>
+          <p>Over 1,120 startups now registered in Algeria; 75 of them have raised $992 million combined.</p>
+        </div>
+      </div>
+      <div class="fact-band reveal">
+        <div class="fact"><div class="n">10–100M DZD</div><div class="l">ASF FUNDING PER LABELED STARTUP</div></div>
+        <div class="fact"><div class="n">20,000</div><div class="l">STARTUPS TARGETED BY THE UNIVERSITY VC FUND</div></div>
+        <div class="fact"><div class="n">$992M</div><div class="l">RAISED BY 75 ALGERIAN STARTUPS</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET / BUSINESS -->
+  <section id="market">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Market &amp; model</div>
+        <h2>From laboratory validation to industrial opportunity.</h2>
+        <p>Supercapacitors are relevant to applications requiring rapid charge/discharge, high power density and long cycle life, including renewable-energy systems, power management, transportation and industrial equipment.</p>
+      </div>
+      <div class="two-col reveal">
+        <div>
+          <h3 style="font-size:15px;font-family:var(--mono);color:var(--olive);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;font-weight:500;">Revenue streams</h3>
+          <div class="stream">
+            <div class="tag">B2B</div>
+            <div><h4>Activated carbon powder sales</h4><p>To supercapacitor and battery manufacturers.</p></div>
+          </div>
+          <div class="stream">
+            <div class="tag">PROD</div>
+            <div><h4>Full electrode manufacturing</h4><p>Production and sale of ready-to-use electrodes.</p></div>
+          </div>
+          <div class="stream">
+            <div class="tag">LIC.</div>
+            <div><h4>Technology licensing</h4><p>Licensing the technology to industry players.</p></div>
+          </div>
+          <div class="stream">
+            <div class="tag">R&amp;D</div>
+            <div><h4>Research partnerships</h4><p>Collaborations with universities and industrial labs.</p></div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size:15px;font-family:var(--mono);color:var(--olive);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;font-weight:500;">Roadmap</h3>
+          <div class="phase-list">
+            <div class="phase"><div class="ph-time">0–6 MO</div><div><h4>R&amp;D optimization</h4><p>Carbonization/activation parameters, industrial samples, patent filings.</p></div></div>
+            <div class="phase"><div class="ph-time">6–12 MO</div><div><h4>Pilot-scale ramp-up</h4><p>Kilogram-batch production, trials with partner manufacturers.</p></div></div>
+            <div class="phase"><div class="ph-time">12–18 MO</div><div><h4>Commercial launch</h4><p>Small production line, first sales, strategic partnerships.</p></div></div>
+            <div class="phase" style="border-bottom:none;"><div class="ph-time">18–24 MO</div><div><h4>Industrialization</h4><p>Full-scale production facility, expansion into international markets.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="team">
+    <div class="wrap">
+      <div class="eyebrow reveal">The team</div>
+      <div class="team-card reveal">
+        <div class="avatar">AB</div>
+        <div class="team-info">
+          <h3>Ahmed Bahloul</h3>
+          <div class="role">Founder &amp; lead researcher — Université de M'sila, Algeria</div>
+          <p style="color:var(--bone-dim);font-size:15px;max-width:560px;">Researcher in electrochemistry, conducting polymers, MnO₂, supercapacitors, and wastewater treatment, with a growing publication record in bio-based energy storage materials.</p>
+          <div class="team-badges">
+            <div class="badge">H-index <b>12</b></div>
+            <div class="badge"><b>780+</b> citations</div>
+            <div class="badge">Top <b>8%</b> of Algerian researchers</div>
+            <div class="badge"><b>75%</b> of impact in the last 5 years</div>
+          </div>
+        </div>
+      </div>
+      <p class="reveal" style="margin-top:36px; font-size:14px; color:var(--bone-dim); border-top:1px solid var(--line); padding-top:24px;">
+        <strong style="color:var(--bone);">Roles we're looking for:</strong> business development co-founder, process engineer for scale-up, sales &amp; marketing lead.
+      </p>
+    </div>
+  </section>
+
+  <!-- FUNDING -->
+  <section id="funding">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Fundraising</div>
+        <h2>Partner with us to move toward scale-up.</h2>
+        <p>We are seeking research, industrial and investment partners to optimize the materials, validate larger-scale production and develop prototype supercapacitor cells and electrodes.</p>
+      </div>
+      <div class="fund-box reveal">
+        <div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--bone-dim);letter-spacing:0.06em;margin-bottom:10px;">AMOUNT SOUGHT</div>
+          <div class="ask">Scale-up partnership</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--bone-dim);margin-top:8px;">Funding requirements to be defined with industrial and R&amp;D partners</div>
+
+          <div style="margin-top:32px;">
+            <div class="alloc-row"><span style="width:150px;font-size:13.5px;color:var(--bone-dim);">Equipment &amp; pilot facility</span><div class="alloc-bar"><i style="width:40%;"></i></div><span class="alloc-pct">40%</span></div>
+            <div class="alloc-row"><span style="width:150px;font-size:13.5px;color:var(--bone-dim);">Raw materials &amp; testing</span><div class="alloc-bar"><i style="width:25%;"></i></div><span class="alloc-pct">25%</span></div>
+            <div class="alloc-row"><span style="width:150px;font-size:13.5px;color:var(--bone-dim);">Personnel</span><div class="alloc-bar"><i style="width:25%;"></i></div><span class="alloc-pct">25%</span></div>
+            <div class="alloc-row"><span style="width:150px;font-size:13.5px;color:var(--bone-dim);">IP &amp; admin</span><div class="alloc-bar"><i style="width:10%;"></i></div><span class="alloc-pct">10%</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--bone-dim);letter-spacing:0.06em;margin-bottom:14px;">TARGETED FUNDING SOURCES</div>
+          <div class="src-grid">
+            <div class="src"><h5>ALGERIA STARTUP FUND</h5><p>10–100M DZD in equity funding for labeled startups.</p></div>
+            <div class="src"><h5>ANADE + NESDA</h5><p>Up to 10M DZD for business creation.</p></div>
+            <div class="src"><h5>SPINLAB (LEIPZIG)</h5><p>Up to €50,000 in support, 0% equity dilution.</p></div>
+            <div class="src"><h5>CHARGEUP (NEW YORK)</h5><p>$25,000 + up to $100,000 follow-on, focused on energy storage.</p></div>
+          </div>
+        </div>
+      </div>
+      <p class="form-note" style="margin-top:18px;">Funding figures and external-program information should be verified and updated before use in a formal investment, grant or commercial application.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Contact</div>
+        <h2>Let's talk about your involvement.</h2>
+        <p>Industrial partner, investor, lab, or incubator — tell us how you'd like to collaborate.</p>
+      </div>
+      <div class="contact-grid reveal">
+        <form id="contactForm">
+          <div class="field"><label for="f-name">Full name</label><input id="f-name" type="text" required placeholder="Your name"></div>
+          <div class="field"><label for="f-org">Organization</label><input id="f-org" type="text" placeholder="Company, fund, university..."></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="you@example.com"></div>
+          <div class="field">
+            <label for="f-interest">Type of collaboration</label>
+            <select id="f-interest">
+              <option>Investment / funding</option>
+              <option>Purchase of activated carbon / electrodes</option>
+              <option>R&amp;D partnership</option>
+              <option>Technology licensing</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" placeholder="Tell us about your project..."></textarea></div>
+          <button type="submit" class="btn btn-primary submit-btn">Send message</button>
+          <p class="form-msg" id="formMsg">Your email application has been prepared. Please confirm it in your email client.</p>
+          <p class="form-note">* The form opens your email client. It can later be connected to Formspree, Netlify Forms or a dedicated backend.</p>
+        </form>
+        <div class="contact-info">
+          <h4>Contact details</h4>
+          <div class="contact-line"><span>Project lead</span><span>Ahmed Bahloul</span></div>
+          <div class="contact-line"><span>Institution</span><span>Université de M'sila, Algeria</span></div>
+          <div class="contact-line"><span>Email</span><span>ahmed.bahloul@univ-msila.dz</span></div>
+          <div class="contact-line"><span>Phone</span><span>[+213 · your number]</span></div>
+          <div class="contact-line"><span>LinkedIn</span><span>[your LinkedIn profile]</span></div>
+          <p class="form-note" style="margin-top:24px;">Replace the bracketed fields with your real details before publishing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-row">
+      <p>NOYAU — Bio-based supercapacitors · Université de M'sila, Algeria</p>
+      <p>Activated carbon from date &amp; olive pits · Research-to-industry platform</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+// mobile nav
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', ()=>{
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>navLinks.classList.remove('open')));
+
+// scroll reveal
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// contact form (no backend — visual confirmation only)
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('f-name').value.trim();
+  const org = document.getElementById('f-org').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const interest = document.getElementById('f-interest').value;
+  const msg = document.getElementById('f-msg').value.trim();
+  const subject = encodeURIComponent('NOYAU — Partnership enquiry: ' + interest);
+  const body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Organization: ' + org + '\n' +
+    'Email: ' + email + '\n' +
+    'Interest: ' + interest + '\n\n' +
+    msg
+  );
+  window.location.href = 'mailto:ahmed.bahloul@univ-msila.dz?subject=' + subject + '&body=' + body;
+  document.getElementById('formMsg').classList.add('show');
+  this.querySelector('.submit-btn').textContent = 'Email prepared ✓';
+});
+</script>
+</body>
+</html>
